@@ -108,54 +108,49 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Container(
-            child: Column(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor:
+            Color.fromARGB(255, 61, 156, 7), // Changed AppBar color
+      ),
+      body: Padding(
+        // Changed Container to Padding
+        padding: EdgeInsets.all(10.0), // Added padding to the whole body
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Changed alignment
           children: <Widget>[
-            Container(
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
-                child: Text(output,
-                    style: TextStyle(
-                      fontSize: 48.0,
-                      fontWeight: FontWeight.bold,
-                    ))),
             Expanded(
-              child: Divider(),
+              child: Text(
+                output,
+                textAlign: TextAlign.right, // Changed alignment
+                style: TextStyle(
+                  fontSize: 48.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey, // Changed text color
+                ),
+              ),
             ),
-            Column(children: [
-              Row(children: [
-                buildButton("7"),
-                buildButton("8"),
-                buildButton("9"),
-                buildButton("/")
-              ]),
-              Row(children: [
-                buildButton("4"),
-                buildButton("5"),
-                buildButton("6"),
-                buildButton("X")
-              ]),
-              Row(children: [
-                buildButton("1"),
-                buildButton("2"),
-                buildButton("3"),
-                buildButton("-")
-              ]),
-              Row(children: [
-                buildButton("."),
-                buildButton("0"),
-                buildButton("00"),
-                buildButton("+")
-              ]),
-              Row(children: [
-                buildButton("CLEAR"),
-                buildButton("="),
-              ])
-            ])
+            Divider(),
+            Column(
+              children: [
+                buildButtonRow(["7", "8", "9", "/"]),
+                buildButtonRow(["4", "5", "6", "X"]),
+                buildButtonRow(["1", "2", "3", "-"]),
+                buildButtonRow([".", "0", "00", "+"]),
+                buildButtonRow(["CLEAR", "="]),
+              ],
+            ),
           ],
-        )));
+        ),
+      ),
+    );
+  }
+
+// Helper function to build a row of buttons
+  Widget buildButtonRow(List<String> buttonLabels) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Changed alignment
+      children: buttonLabels.map((label) => buildButton(label)).toList(),
+    );
   }
 }
